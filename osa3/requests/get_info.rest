@@ -1,1 +1,1 @@
-GET http://localhost:3001/info
+GET https://phonebook-4jsn.onrender.com
