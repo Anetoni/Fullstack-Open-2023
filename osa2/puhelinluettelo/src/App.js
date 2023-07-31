@@ -40,9 +40,9 @@ const App = () => {
         console.log('updated ', updatedPerson)
         console.log('old ', person)
         personService
-          .update(person.id, updatedPerson)
+          .update(person._id, updatedPerson)
             .then(updatedReturnedPerson => {
-            setPersons(persons.map(p => p.id !== person.id ? p : updatedReturnedPerson))
+            setPersons(persons.map(p => p._id !== person._id ? p : updatedReturnedPerson))
         })
         .catch(error => {
           setNotifType('error')
