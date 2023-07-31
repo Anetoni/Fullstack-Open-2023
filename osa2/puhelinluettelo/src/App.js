@@ -81,19 +81,20 @@ const App = () => {
   }
 
   const removePerson = (person) => {
-    console.log(person.name + ' to be removed')
+    console.log(person + ' to be removed')
     if(window.confirm(`Delete ${person.name}?`)) {
-        console.log('removed id should be ', person.id)
+        console.log('removed id should be ', person._id)
         personService
-        .remove(person.id)
-          .then(() => setPersons(persons.filter(p => p.id !== person.id)))
+        .remove(person._id)
+          .then(() => setPersons(persons.filter(p => p._id !== person._id)))
+    
+        setNotifType('success')
+        setNotification(`${person.name} was deleted from the phonebook`)
+            setTimeout(() => {
+              setNotification(null)
+            }, 5000)
+      }
     }
-    setNotifType('success')
-    setNotification(`${person.name} was deleted from the phonebook`)
-        setTimeout(() => {
-          setNotification(null)
-        }, 5000)
-  }
 
   const handlePersonChange = (event) => { 
     console.log('person: ', event.target.value)
