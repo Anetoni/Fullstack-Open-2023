@@ -73,6 +73,14 @@ const App = () => {
           setNewName('')
           setNewNumber('')
       })
+      .catch(error => {
+        console.log(error.response.data.error)
+        setNotifType('error')
+        setNotification(error.response.data.error)
+        setTimeout(() => {
+          setNotification(null)
+        }, 5000)
+      })
       setNotifType('success')
       setNotification(`${newPerson.name} was successfully added`)
       setTimeout(() => {
