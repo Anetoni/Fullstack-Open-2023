@@ -16,8 +16,8 @@ mongoose
   .then(() => {
     info("connected to MongoDB");
   })
-  .catch((error) => {
-    error("error connecting to MongoDB: ", error.message);
+  .catch((err) => {
+    error("error connecting to MongoDB: ", err.message);
   });
 
 app.use(cors());
