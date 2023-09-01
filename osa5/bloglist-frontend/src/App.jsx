@@ -49,6 +49,13 @@ const App = () => {
       )
       blogService.setToken(user.token)
       setUser(user)
+
+      setNotifType('success')
+      setNotification(`Successfully logged in as ${user.username}`)
+      setTimeout(() => {
+        setNotification(null)
+      }, 5000)
+
       setUsername('')
       setPassword('')
     } catch (exception) {
@@ -67,7 +74,6 @@ const App = () => {
   }
 
   const handleInputChange = (event) => {
-    console.log(event.target.value)
     const { name, value } = event.target
     setNewBlog({
       ...newBlog,
@@ -77,7 +83,7 @@ const App = () => {
   }
 
   const createBlog = async (event) => {
-    event.preventDefault
+    event.preventDefault()
     const blogObject = {
       title: newBlog.title,
       author: newBlog.author,
@@ -86,14 +92,20 @@ const App = () => {
 
     const returnedBlog = await blogService.create(blogObject)
     setBlogs(blogs.concat(returnedBlog))
-    setNewBlog('')
 
+    setNotifType('success')
+    setNotification(`a new blog titled ${returnedBlog.title} by ${returnedBlog.author} added`)
+    setTimeout(() => {
+      setNotification(null)
+    }, 5000)
+
+    setNewBlog('')
   }
 
   if (user === null) {
     return (
       <div>
-        <Notification message={notification}/>
+        <Notification message={notification} type={notifType}/>
         <h2>log in to application</h2>
         <Login username={username}
           password={password}
@@ -106,6 +118,7 @@ const App = () => {
   } else if (user) {
     return (
       <div>
+        <Notification message={notification} type={notifType}/>
         <p>
           {user.name} logged in <button type='click' onClick={logout}>logout</button>
         </p>
