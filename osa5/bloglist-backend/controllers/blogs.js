@@ -30,6 +30,7 @@ router.post('/', userExtractor, async (request, response) => {
 
   user.blogs = user.blogs.concat(createdBlog._id)
   await user.save()
+  await createdBlog.populate('user', { username: 1 })
 
   response.status(201).json(createdBlog)
 })
