@@ -31,7 +31,7 @@ const Blog = ({ blog }) => {
           <br></br>
           likes {blog.likes} <button type="button">like</button>
           <br></br>
-          by {blog.user.username}
+          added by {blog.user.username}
       </div>
     </div>
   )
