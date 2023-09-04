@@ -8,11 +8,6 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 
 const App = () => {
-  const initialBlogValues = {
-    title: '',
-    author: '',
-    url: ''
-  }
 
   const [blogs, setBlogs] = useState([])
   const [notification, setNotification] = useState(null)
@@ -20,7 +15,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [newBlog, setNewBlog] = useState(initialBlogValues)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -68,29 +62,7 @@ const App = () => {
     }
   }
 
-  const logout = () => {
-    window.localStorage.removeItem("loggedInUser")
-    setUser(null)
-    console.log('logged out')
-  }
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target
-    setNewBlog({
-      ...newBlog,
-      [name]: value
-    })
-    console.log(newBlog)
-  }
-
-  const createBlog = async (event) => {
-    event.preventDefault()
-    const blogObject = {
-      title: newBlog.title,
-      author: newBlog.author,
-      url: newBlog.url
-    }
-
+  const addBlog = (blogObject) => {
     const returnedBlog = await blogService.create(blogObject)
     setBlogs(blogs.concat(returnedBlog))
 
@@ -99,8 +71,12 @@ const App = () => {
     setTimeout(() => {
       setNotification(null)
     }, 5000)
+  }
 
-    setNewBlog('')
+  const logout = () => {
+    window.localStorage.removeItem("loggedInUser")
+    setUser(null)
+    console.log('logged out')
   }
 
   if (user === null) {
@@ -125,10 +101,8 @@ const App = () => {
         </p>
         <Togglable label="new blog">
           <h2>create a new blog</h2>
-          <BlogForm createBlog={createBlog}
-            newBlog={newBlog}
-            setNewBlog={setNewBlog}
-            handleInputChange={handleInputChange}
+          <BlogForm
+            addBlog={addBlog}
           ></BlogForm>
         </Togglable>
         <h2>blogs</h2>
