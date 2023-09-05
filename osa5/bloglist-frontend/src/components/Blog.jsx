@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const Blog = ({ blog, updateLikes }) => {
+const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -27,19 +27,51 @@ const Blog = ({ blog, updateLikes }) => {
     updateLikes(blog.id)
   }
 
-  const infoView = () => (
-    <div style={blogStyle}>
-      <div>
-          {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
-          <br></br>
-          {blog.url}
-          <br></br>
-          likes {blog.likes} <button type="button" onClick={like}>like</button>
-          <br></br>
-          added by {blog.user.username}
-      </div>
-    </div>
-  )
+  const handleDelete = () => {
+    console.log('delete pressed')
+    deleteBlog(blog.id)
+  }
+
+  const verifyUserForDeletion = () => {
+    if (blog.user.username === user.username) {
+      return true
+    }
+    return false
+  }
+
+  const infoView = () => {
+    if (verifyUserForDeletion()) {
+      return (
+        <div style={blogStyle}>
+          <div>
+              {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
+              <br></br>
+              {blog.url}
+              <br></br>
+              likes {blog.likes} <button type="button" onClick={like}>like</button>
+              <br></br>
+              added by {blog.user.username}
+              <br></br>
+              <button type="button" onClick={handleDelete}>delete</button>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div style={blogStyle}>
+          <div>
+              {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
+              <br></br>
+              {blog.url}
+              <br></br>
+              likes {blog.likes} <button type="button" onClick={like}>like</button>
+              <br></br>
+              added by {blog.user.username}
+          </div>
+        </div>
+      )
+    }
+  }
 
   return (
   <div>

@@ -86,6 +86,15 @@ const App = () => {
     setBlogs(blogs.map(blog => blog.id !== id ? blog : returnedBlog).sort((a, b) => b.likes - a.likes))
   }
 
+  const deleteBlog = async (id) => {
+    const blog = blogs.find(blog => blog.id === id)
+    if (window.confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
+      await blogService.remove(id)
+      const blogsWithoutDeletedBlog = blogs.filter(blog => blog.id !== id)
+      setBlogs(blogsWithoutDeletedBlog)
+    }
+  }
+
   const logout = () => {
     window.localStorage.removeItem("loggedInUser")
     setUser(null)
@@ -118,7 +127,7 @@ const App = () => {
         </Togglable>
         <h2>blogs</h2>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} updateLikes={updateLikes} />
+          <Blog key={blog.id} blog={blog} updateLikes={updateLikes} deleteBlog={deleteBlog} user={user} />
         )}
       </div>
     )
