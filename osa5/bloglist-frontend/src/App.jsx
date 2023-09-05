@@ -76,6 +76,15 @@ const App = () => {
     }, 5000)
   }
 
+  const updateLikes = async (id) => {
+    console.log(id)
+    const blog = blogs.find(blog => blog.id === id)
+    console.log('liked ', blog)
+    const updatedBlog = { ...blog, likes: blog.likes+1 }
+    const returnedBlog = await blogService.update(id, updatedBlog)
+    setBlogs(blogs.map(blog => blog.id !== id ? blog : returnedBlog))
+  }
+
   const logout = () => {
     window.localStorage.removeItem("loggedInUser")
     setUser(null)
@@ -108,7 +117,7 @@ const App = () => {
         </Togglable>
         <h2>blogs</h2>
         {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
+          <Blog key={blog.id} blog={blog} updateLikes={updateLikes} />
         )}
       </div>
     )

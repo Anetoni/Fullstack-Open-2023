@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, updateLikes }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -22,6 +22,11 @@ const Blog = ({ blog }) => {
     </div>  
   )
 
+  const like = () => {
+    console.log('like pressed')
+    updateLikes(blog.id)
+  }
+
   const infoView = () => (
     <div style={blogStyle}>
       <div>
@@ -29,12 +34,13 @@ const Blog = ({ blog }) => {
           <br></br>
           {blog.url}
           <br></br>
-          likes {blog.likes} <button type="button">like</button>
+          likes {blog.likes} <button type="button" onClick={like}>like</button>
           <br></br>
           added by {blog.user.username}
       </div>
     </div>
   )
+
   return (
   <div>
     {!view && simpleView()}
