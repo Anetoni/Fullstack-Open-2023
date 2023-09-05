@@ -23,7 +23,7 @@ const App = () => {
       blogs.sort((a, b) => b.likes - a.likes)
       setBlogs(blogs)
     }
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const App = () => {
   }
 
   const logout = () => {
-    window.localStorage.removeItem("loggedInUser")
+    window.localStorage.removeItem('loggedInUser')
     setUser(null)
     console.log('logged out')
   }
@@ -109,7 +109,7 @@ const App = () => {
         <LoginForm username={username}
           password={password}
           setUsername={setUsername}
-          handleLogin={handleLogin} 
+          handleLogin={handleLogin}
           setPassword={setPassword}
         ></LoginForm>
       </div>

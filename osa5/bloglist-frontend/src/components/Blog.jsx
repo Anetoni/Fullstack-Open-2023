@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
   const blogStyle = {
@@ -19,7 +19,7 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
       <div>
         {blog.title} by {blog.author} <button type="button" onClick={toggleView}>view</button>
       </div>
-    </div>  
+    </div>
   )
 
   const like = () => {
@@ -44,15 +44,15 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
       return (
         <div style={blogStyle}>
           <div>
-              {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
-              <br></br>
-              {blog.url}
-              <br></br>
+            {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
+            <br></br>
+            {blog.url}
+            <br></br>
               likes {blog.likes} <button type="button" onClick={like}>like</button>
-              <br></br>
+            <br></br>
               added by {blog.user.username}
-              <br></br>
-              <button type="button" onClick={handleDelete}>delete</button>
+            <br></br>
+            <button type="button" onClick={handleDelete}>delete</button>
           </div>
         </div>
       )
@@ -60,12 +60,12 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
       return (
         <div style={blogStyle}>
           <div>
-              {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
-              <br></br>
-              {blog.url}
-              <br></br>
+            {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
+            <br></br>
+            {blog.url}
+            <br></br>
               likes {blog.likes} <button type="button" onClick={like}>like</button>
-              <br></br>
+            <br></br>
               added by {blog.user.username}
           </div>
         </div>
@@ -74,10 +74,10 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
   }
 
   return (
-  <div>
-    {!view && simpleView()}
-    {view && infoView()}
-  </div>
+    <div>
+      {!view && simpleView()}
+      {view && infoView()}
+    </div>
   )
 }
 
