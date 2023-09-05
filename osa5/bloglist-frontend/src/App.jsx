@@ -19,8 +19,10 @@ const App = () => {
   const blogFormRef = useRef()
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
+    blogService.getAll().then(blogs => {
+      blogs.sort((a, b) => b.likes - a.likes)
+      setBlogs(blogs)
+    }
     )  
   }, [])
 
@@ -77,12 +79,11 @@ const App = () => {
   }
 
   const updateLikes = async (id) => {
-    console.log(id)
     const blog = blogs.find(blog => blog.id === id)
     console.log('liked ', blog)
     const updatedBlog = { ...blog, likes: blog.likes+1 }
     const returnedBlog = await blogService.update(id, updatedBlog)
-    setBlogs(blogs.map(blog => blog.id !== id ? blog : returnedBlog))
+    setBlogs(blogs.map(blog => blog.id !== id ? blog : returnedBlog).sort((a, b) => b.likes - a.likes))
   }
 
   const logout = () => {
