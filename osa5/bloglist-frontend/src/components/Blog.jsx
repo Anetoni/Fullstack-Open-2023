@@ -42,7 +42,7 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
   const infoView = () => {
     if (verifyUserForDeletion()) {
       return (
-        <div style={blogStyle}>
+        <div style={blogStyle} className='blog'>
           <div>
             {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
             <br></br>
@@ -58,7 +58,7 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
       )
     } else {
       return (
-        <div style={blogStyle}>
+        <div style={blogStyle} className='blog'>
           <div>
             {blog.title} by {blog.author} <button type="button" onClick={toggleView}>hide</button>
             <br></br>
