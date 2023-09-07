@@ -17,7 +17,7 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
   const simpleView = () => (
     <div style={blogStyle}>
       <div>
-        {blog.title} by {blog.author} <button type="button" onClick={toggleView}>view</button>
+        {blog.title} by {blog.author} <button id='view-button' type="button" onClick={toggleView}>view</button>
       </div>
     </div>
   )
@@ -48,11 +48,11 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
             <br></br>
             {blog.url}
             <br></br>
-              likes {blog.likes} <button type="button" onClick={like}>like</button>
+              likes {blog.likes} <button id='like-button' type="button" onClick={like}>like</button>
             <br></br>
               added by {blog.user.username}
             <br></br>
-            <button type="button" onClick={handleDelete}>delete</button>
+            <button id='delete-button' type="button" onClick={handleDelete}>delete</button>
           </div>
         </div>
       )
