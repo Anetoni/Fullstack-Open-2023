@@ -38,4 +38,25 @@ describe('Blog app', function() {
       cy.get('html').should('not.contain', 'Testaaja McLoving logged in')
     })
   })
+
+  //5.19
+  describe('When logged in', function() {
+    beforeEach(function() {
+      cy.get('#username').type('mcloving')
+      cy.get('#password').type('secret')
+      cy.get('#login-button').click()
+
+      cy.contains('Testaaja McLoving logged in')
+    })
+
+    it('A blog can be created', function() {
+      cy.contains('new blog').click()
+      cy.get('#title').type('Cypress Testing is fun')
+      cy.get('#author').type('Testaaja McLoving')
+      cy.get('#url').type('McLovingBlogs.com')
+
+      cy.get('#submit-button').click()
+      cy.contains('Cypress Testing is fun by Testaaja McLoving')
+    })
+  })
 })
