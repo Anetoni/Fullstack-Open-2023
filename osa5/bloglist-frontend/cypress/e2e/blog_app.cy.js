@@ -58,5 +58,23 @@ describe('Blog app', function() {
       cy.get('#submit-button').click()
       cy.contains('Cypress Testing is fun by Testaaja McLoving')
     })
+
+    describe('When a blog is created', function() {
+      beforeEach(function() {
+        cy.contains('new blog').click()
+        cy.get('#title').type('Initial blog')
+        cy.get('#author').type('Testaaja McLoving')
+        cy.get('#url').type('McLovingBlogs.com')
+
+        cy.get('#submit-button').click()
+      })
+
+      //5.19
+      it('a blog can be liked', function() {
+        cy.get('#view-button').click()
+        cy.get('#like-button').click()
+        cy.contains('likes 1')
+      })
+    })
   })
 })
