@@ -76,12 +76,34 @@ describe('Blog app', function() {
         cy.contains('likes 1')
       })
 
+      //5.21
       it('blog adder can delete blog', function() {
         cy.get('#view-button').click()
         cy.get('#delete-button').click()
         cy.on('window:confirm', () => true)
 
         cy.should('not.contain', 'Initial blog by Testaaja McLoving')
+      })
+
+      //5.22
+      it('only blog adder can see delete button', function() {
+        cy.get('#logout-button').click()
+        const user = {
+          name: 'Secondary User',
+          username: 'secouser',
+          password: 'sala'
+        }
+        cy.request('POST', 'http://localhost:3003/api/users/', user)
+        cy.visit('http://localhost:5173')
+
+        cy.get('#username').type('secouser')
+        cy.get('#password').type('sala')
+        cy.get('#login-button').click()
+
+        cy.contains('Secondary User logged in')
+
+        cy.get('#view-button').click()
+        cy.get('#delete-button').should('not.exist')
       })
     })
   })
