@@ -69,11 +69,19 @@ describe('Blog app', function() {
         cy.get('#submit-button').click()
       })
 
-      //5.19
+      //5.20
       it('a blog can be liked', function() {
         cy.get('#view-button').click()
         cy.get('#like-button').click()
         cy.contains('likes 1')
+      })
+
+      it('blog adder can delete blog', function() {
+        cy.get('#view-button').click()
+        cy.get('#delete-button').click()
+        cy.on('window:confirm', () => true)
+
+        cy.should('not.contain', 'Initial blog by Testaaja McLoving')
       })
     })
   })
