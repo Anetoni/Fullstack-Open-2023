@@ -106,5 +106,33 @@ describe('Blog app', function() {
         cy.get('#delete-button').should('not.exist')
       })
     })
+
+    describe('When multiple blogs are listed', function() {
+      beforeEach(function() {
+        cy.contains('new blog').click()
+        cy.get('#title').type('Initial blog with less likes')
+        cy.get('#author').type('Testaaja McLoving')
+        cy.get('#url').type('McLovingBlogs.com')
+
+        cy.get('#submit-button').click()
+
+        cy.contains('new blog').click()
+        cy.get('#title').type('Initial blog with most likes')
+        cy.get('#author').type('Testaaja McLoving')
+        cy.get('#url').type('McLovingBlogs.com')
+
+        cy.get('#submit-button').click()
+      })
+
+      it('blogs are ordered by likes', function() {
+        cy.get('#view-button').click()
+        cy.get('#view-button').click()
+        cy.get('.blog').find('#like-button').eq(1).click()
+
+        cy.get('.blog').eq(0).should('contain', 'Initial blog with most likes')
+        cy.get('.blog').eq(1).should('contain', 'Initial blog with less likes')
+
+      })
+    })
   })
 })
